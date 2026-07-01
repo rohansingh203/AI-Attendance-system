@@ -22,7 +22,7 @@ def style_background_dashboard():
     st.markdown("""
         <style>
                 .stApp{
-                    background: ##E0E3FF !important;
+                    background: #E0E3FF !important;
                 }
         </style>
                 """
