@@ -52,7 +52,7 @@ def get_trained_model():
         embedding = student.get('face_embedding')
         if embedding:
             X.append(np.array(embedding))
-            y.append(student.array('student_id'))
+            y.append(student.get('student_id'))
 
     if len(X) ==0:
         return 0
@@ -71,7 +71,7 @@ def get_trained_model():
 
 def train_classifier():
     st.cache_resource.clear()
-    model_data = get_trained_model
+    model_data = get_trained_model()
     return bool(model_data)
 
 def predict_attendance(class_image_np):
@@ -90,7 +90,7 @@ def predict_attendance(class_image_np):
 
     all_students = sorted(list(set(y_train)))
 
-    for encoding in encoding:
+    for encoding in encodings:
         if len(all_students)>=2:
             predicted_id= int(clf.predict([encoding])[0])
         else:
@@ -104,4 +104,4 @@ def predict_attendance(class_image_np):
 
         if bext_match_score <= resemblance_threshold:
             detected_student[predicted_id] = True
-    return detected_student, all_students, len(encoding)
+    return detected_student, all_students, len(encodings)
